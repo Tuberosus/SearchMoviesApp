@@ -1,7 +1,9 @@
 package ru.me.searchmoviesapp.ui.movies
 
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.models.Movie
 
 class MoviesAdapter(private val clickListener: MovieClickListener) : RecyclerView.Adapter<MovieViewHolder>() {
@@ -12,7 +14,14 @@ class MoviesAdapter(private val clickListener: MovieClickListener) : RecyclerVie
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies.get(position))
-        holder.itemView.setOnClickListener { clickListener.onMovieClick(movies.get(position)) }
+        holder.itemView.setOnClickListener {
+            clickListener.onMovieClick(movies.get(position))
+        }
+
+        val favorite = holder.itemView.findViewById<ImageView>(R.id.favorite)
+        favorite.setOnClickListener {
+            clickListener.onFavoriteToggleClick(movies.get(position))
+        }
     }
 
     override fun getItemCount(): Int = movies.size
