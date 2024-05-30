@@ -19,7 +19,6 @@ class MovieViewHolder(
     var cover: ImageView = itemView.findViewById(R.id.cover)
     var title: TextView = itemView.findViewById(R.id.title)
     var description: TextView = itemView.findViewById(R.id.description)
-    // 1
     var inFavoriteToggle: ImageView = itemView.findViewById(R.id.favorite)
 
     fun bind(movie: Movie) {
@@ -30,11 +29,9 @@ class MovieViewHolder(
         title.text = movie.title
         description.text = movie.description
 
-        // 2
         inFavoriteToggle.setImageDrawable(getFavoriteToggleDrawable(movie.inFavorite))
     }
 
-    // 3
     private fun getFavoriteToggleDrawable(inFavorite: Boolean): Drawable? {
         return itemView.context.getDrawable(
             if(inFavorite) R.drawable.active_favorite else R.drawable.inactive_favorite

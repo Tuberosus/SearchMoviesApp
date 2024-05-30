@@ -4,33 +4,25 @@ import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.lifecycle.ViewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.Movie
-import util.Creator
 import util.SingleLiveEvent
 
-class MoviesSearchViewModel(application: Application) : AndroidViewModel(application) {
+class MoviesSearchViewModel(
+    private val application: Application,
+    private val moviesInteractor: MoviesInteractor,
+) : ViewModel() {
 
     companion object {
         private const val SEARCH_DEBOUNCE_DELAY = 2000L
         private val SEARCH_REQUEST_TOKEN = Any()
-
-        fun getViewModelFactory(): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                MoviesSearchViewModel(this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as Application)
-            }
-        }
     }
 
-    private val moviesInteractor = Creator.provideMoviesInteractor(getApplication())
     private val handler = Handler(Looper.getMainLooper())
 
     private val stateLiveData = MutableLiveData<MoviesState>()
@@ -78,16 +70,16 @@ class MoviesSearchViewModel(application: Application) : AndroidViewModel(applica
                         errorMessage != null -> {
                             renderState(
                                 MoviesState.Error(
-                                    errorMessage = getApplication<Application>().getString(R.string.something_went_wrong),
+                                    errorMessage = application.getString(R.string.something_went_wrong),
                                 )
                             )
-                            showToast.postValue(errorMessage)
+                            showToast.postValue(errorMessage!!)
                         }
 
                         movies.isEmpty() -> {
                             renderState(
                                 MoviesState.Empty(
-                                    message = getApplication<Application>().getString(R.string.nothing_found),
+                                    message = application.getString(R.string.nothing_found),
                                 )
                             )
                         }

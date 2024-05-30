@@ -3,22 +3,14 @@ package ru.me.searchmoviesapp.data.network
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import ru.me.searchmoviesapp.data.NetworkClient
 import ru.me.searchmoviesapp.data.dto.MoviesSearchRequest
 import ru.me.searchmoviesapp.data.dto.Response
 
-class RetrofitNetworkClient(private val context: Context) : NetworkClient {
-
-    private val imdbBaseUrl = "https://tv-api.com"
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(imdbBaseUrl)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val imdbService = retrofit.create(IMDbApiService::class.java)
+class RetrofitNetworkClient(
+    private val context: Context,
+    private val imdbService: IMDbApiService,
+    ) : NetworkClient {
 
     override fun doRequest(dto: Any): Response {
         if (isConnected() == false) {
