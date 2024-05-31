@@ -1,6 +1,8 @@
 package ru.me.searchmoviesapp.data
 
 import ru.me.searchmoviesapp.data.SharedPreferences.LocalStorage
+import ru.me.searchmoviesapp.data.dto.MovieDetailsRequest
+import ru.me.searchmoviesapp.domain.models.MovieDetails
 import ru.me.searchmoviesapp.data.dto.MoviesSearchRequest
 import ru.me.searchmoviesapp.data.dto.MoviesSearchResponse
 import ru.me.searchmoviesapp.domain.api.MoviesRepository
@@ -33,5 +35,14 @@ class MoviesRepositoryImpl(private val networkClient: NetworkClient, private val
 
     override fun removeMovieFromFavorites(movie: Movie) {
         localStorage.removeFromFavorites(movie.id)
+    }
+
+    override fun getMovieDetails(movieId: String): Resource<MovieDetails> {
+        val response = networkClient.doRequest(MovieDetailsRequest(movieId))
+        return when (response.resultCode) {
+            -1 -> Resource.Error("Проверьте подключение к интернету")
+            200 -> Resource.Success((response as MovieDetails))
+            else -> Resource.Error("Ошибка сервера")
+        }
     }
 }

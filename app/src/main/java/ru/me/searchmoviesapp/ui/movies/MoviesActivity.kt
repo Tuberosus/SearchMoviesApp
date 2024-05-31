@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.models.Movie
-import ru.me.searchmoviesapp.ui.poster.PosterActivity
+import ru.me.searchmoviesapp.ui.details.activity.DetailsActivity
 
 class MoviesActivity : AppCompatActivity() {
 
@@ -31,8 +31,9 @@ class MoviesActivity : AppCompatActivity() {
         object : MoviesAdapter.MovieClickListener {
             override fun onMovieClick(movie: Movie) {
                 if (clickDebounce()) {
-                    val intent = Intent(this@MoviesActivity, PosterActivity::class.java)
-                    intent.putExtra("poster", movie.image)
+                    val intent = Intent(this@MoviesActivity, DetailsActivity::class.java)
+                    intent.putExtra(DetailsActivity.POSTER_URL, movie.image)
+                    intent.putExtra(DetailsActivity.MOVIE_ID, movie.id)
                     startActivity(intent)
                 }
             }
