@@ -22,7 +22,7 @@
         android:id="@+id/informationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:padding="16dp">
 
         <!--  Barriers  -->
@@ -32,36 +32,7 @@
             android:layout_height="wrap_content"
             app:constraint_referenced_tags="imDbRatingTag"
             app:barrierDirection="end" />
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/countriesBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_tags="countriesTextTag"
-            app:barrierDirection="bottom" />
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/genresBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_tags="genresTextTag"
-            app:barrierDirection="bottom" />
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/directorsBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_tags="directorsTextTag"
-            app:barrierDirection="bottom" />
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/writersBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_tags="writersTextTag"
-            app:barrierDirection="bottom" />
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/starsBarrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_tags="starsTextTag"
-            app:barrierDirection="bottom" />
+
         <!-- Заголовки -->
         <TextView
             android:id="@+id/title"
@@ -69,65 +40,57 @@
             android:layout_height="wrap_content"
             android:textSize="16pt"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Hello" />
+            tools:text="Header" />
         <TextView
             android:id="@+id/imDbRating"
             app:layout_constraintTag="imDbRatingTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="@id/imDbRatingText"
             app:layout_constraintStart_toStartOf="parent"
-
             android:text="@string/imDbRating" />
         <TextView
             android:id="@+id/year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/imDbRating"
+            app:layout_constraintBottom_toBottomOf="@id/yearText"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/year" />
         <TextView
             android:id="@+id/countries"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/year"
+            app:layout_constraintBottom_toBottomOf="@id/countriesText"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/countries" />
         <TextView
             android:id="@+id/genres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/countriesBarrier"
+            app:layout_constraintBottom_toBottomOf="@id/genresText"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/genres" />
         <TextView
             android:id="@+id/directors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/genresBarrier"
+            app:layout_constraintBottom_toBottomOf="@id/directorsText"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/directors" />
         <TextView
             android:id="@+id/writers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/directorsBarrier"
+            app:layout_constraintBottom_toBottomOf="@id/writersText"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/writers" />
         <TextView
             android:id="@+id/stars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="@id/starsText"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/stars" />
@@ -136,9 +99,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             android:textSize="12pt"
-            app:layout_constraintTop_toBottomOf="@id/starsBarrier"
+            app:layout_constraintTop_toBottomOf="@id/stars"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/plot" />
 
@@ -147,64 +110,63 @@
             android:id="@+id/imDbRatingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="14dp"
-            app:layout_constraintTop_toTopOf="@id/imDbRating"
+            android:paddingStart="@dimen/detail_info_start_margin"
+            app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             tools:text="8.8" />
         <TextView
             android:id="@+id/yearText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="14dp"
-            app:layout_constraintTop_toTopOf="@id/year"
+            android:paddingStart="@dimen/detail_info_start_margin"
+            app:layout_constraintTop_toBottomOf="@id/imDbRating"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             tools:text="2010" />
         <TextView
             android:id="@+id/countriesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTag="countriesTextTag"
-            android:paddingStart="14dp"
-            app:layout_constraintTop_toTopOf="@id/countries"
+            android:paddingStart="@dimen/detail_info_start_margin"
+            app:layout_constraintTop_toBottomOf="@id/year"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             tools:text="@string/countries" />
         <TextView
             android:id="@+id/genresText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTag="genresTextTag"
-            android:paddingStart="14dp"
-            app:layout_constraintTop_toTopOf="@id/genres"
+            android:paddingStart="@dimen/detail_info_start_margin"
+            app:layout_constraintTop_toBottomOf="@id/countries"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             tools:text="@string/genres" />
         <TextView
             android:id="@+id/directorsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTag="directorsTextTag"
-            android:paddingStart="14dp"
-            app:layout_constraintTop_toTopOf="@id/directors"
+            android:paddingStart="@dimen/detail_info_start_margin"
+            app:layout_constraintTop_toBottomOf="@id/genres"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             tools:text="@string/directors" />
         <TextView
             android:id="@+id/writersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTag="writersTextTag"
-            android:paddingStart="14dp"
-            app:layout_constraintTop_toTopOf="@id/writers"
+            android:paddingStart="@dimen/detail_info_start_margin"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
+            app:layout_constraintTop_toBottomOf="@id/directors"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/writers" />
         <TextView
             android:id="@+id/starsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTag="starsTextTag"
-            android:paddingStart="14dp"
+            android:paddingStart="@dimen/detail_info_start_margin"
             app:layout_constrainedWidth="true"
-            android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
-            app:layout_constraintTop_toBottomOf="@id/writersBarrier"
+            app:layout_constraintTop_toBottomOf="@id/writers"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Элайджа Вуд, Иэн Маккеллен, Лив Тайлер, Вигго Мортенсен" />
         <TextView
