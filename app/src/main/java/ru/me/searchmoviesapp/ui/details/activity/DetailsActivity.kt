@@ -1,16 +1,11 @@
 package ru.me.searchmoviesapp.ui.details.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.databinding.ActivityDetailsBinding
-import ru.me.searchmoviesapp.domain.models.MovieDetails
-import ru.me.searchmoviesapp.ui.details.DetailsScreenState
 import ru.me.searchmoviesapp.ui.details.fragments.DetailsViewPagerAdapter
-import ru.me.searchmoviesapp.ui.details.view_model.InfoDetailsViewModel
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -28,7 +23,6 @@ class DetailsActivity : AppCompatActivity() {
 
         val posterUrl = intent.getStringExtra(POSTER_URL).toString()
         val movieId = intent.getStringExtra(MOVIE_ID)
-//        Log.d("MyTag", posterUrl)
         val pagerAdapter = DetailsViewPagerAdapter(
                 supportFragmentManager,
                 lifecycle,

@@ -43,31 +43,41 @@ class InfoDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getInfoDetailsState().observe(viewLifecycleOwner) {
             when (it) {
-                DetailsScreenState.Loading -> {}
-                is DetailsScreenState.Error -> {}
+                DetailsScreenState.Loading -> { showLoading() }
+                is DetailsScreenState.Error -> { showError(it.errorMessage)}
                 is DetailsScreenState.Content -> {showContent(it.movieDetails)}
             }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        arguments = null
+    private fun showError(errorMessage: String) {
+        binding.apply {
+            progressBar.visibility = View.GONE
+            errorText.visibility = View.VISIBLE
+        }
     }
 
-    private fun showError(errorMessage: String) {
-
+    private fun showLoading() {
+        binding.apply {
+            errorText.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
     private fun showContent(movieDetails: MovieDetails) {
-        binding.title.text = movieDetails.title
-        binding.imDbRatingText.text = movieDetails.imDbRating
-        binding.yearText.text = movieDetails.year
-        binding.countriesText.text = movieDetails.countries
-        binding.genresText.text = movieDetails.genres
-        binding.directorsText.text = movieDetails.directors
-        binding.writersText.text = movieDetails.writers
-        binding.starsText.text = movieDetails.stars
-        binding.plotText.text = movieDetails.plot
+        binding.apply {
+            errorText.visibility = View.GONE
+            progressBar.visibility = View.GONE
+            informationView.visibility = View.VISIBLE
+            title.text = movieDetails.title
+            imDbRatingText.text = movieDetails.imDbRating
+            yearText.text = movieDetails.year
+            countriesText.text = movieDetails.countries
+            genresText.text = movieDetails.genres
+            directorsText.text = movieDetails.directors
+            writersText.text = movieDetails.writers
+            starsText.text = movieDetails.stars
+            plotText.text = movieDetails.plot
+        }
     }
 }
