@@ -108,63 +108,64 @@
         <!--  Переменные  -->
         <TextView
             android:id="@+id/imDbRatingText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
             app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="8.8" />
         <TextView
             android:id="@+id/yearText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
             app:layout_constraintTop_toBottomOf="@id/imDbRating"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="2010" />
         <TextView
             android:id="@+id/countriesText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
             app:layout_constraintTop_toBottomOf="@id/year"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/countries" />
         <TextView
             android:id="@+id/genresText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
             app:layout_constraintTop_toBottomOf="@id/countries"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/genres" />
         <TextView
             android:id="@+id/directorsText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
             app:layout_constraintTop_toBottomOf="@id/genres"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/directors" />
         <TextView
             android:id="@+id/writersText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintTop_toBottomOf="@id/directors"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/writers" />
         <TextView
             android:id="@+id/starsText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTag="starsTextTag"
             android:paddingStart="@dimen/detail_info_start_margin"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintTop_toBottomOf="@id/writers"
             app:layout_constraintEnd_toEndOf="parent"
