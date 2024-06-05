@@ -2,4 +2,5 @@
 <resources>
     <dimen name="detail_info_top_margin">14dp</dimen>
     <dimen name="detail_info_start_margin">8dp</dimen>
+    <dimen name="detail_info_button_margin">24dp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package ru.me.searchmoviesapp.ui.details.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import ru.me.searchmoviesapp.domain.models.MovieDetails
 import ru.me.searchmoviesapp.ui.details.DetailsScreenState
 import ru.me.searchmoviesapp.ui.details.activity.DetailsActivity
 import ru.me.searchmoviesapp.ui.details.view_model.InfoDetailsViewModel
+import ru.me.searchmoviesapp.ui.movies_cast.activity.MoviesCastActivity
 
 class InfoDetailsFragment : Fragment() {
 
@@ -22,6 +24,9 @@ class InfoDetailsFragment : Fragment() {
                 putString(MOVIE_ID, movieID)
             }
         }
+    }
+    private val movieId by lazy {
+        requireArguments().getString(DetailsActivity.MOVIE_ID)
     }
 
     private val viewModel by viewModel<InfoDetailsViewModel> {
@@ -47,6 +52,11 @@ class InfoDetailsFragment : Fragment() {
                 is DetailsScreenState.Error -> { showError(it.errorMessage)}
                 is DetailsScreenState.Content -> {showContent(it.movieDetails)}
             }
+        }
+
+        binding.toCast.setOnClickListener {
+            val intent = MoviesCastActivity.newInstance(requireContext(), movieId!!)
+            startActivity(intent)
         }
     }
 

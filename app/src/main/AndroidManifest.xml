@@ -17,6 +17,9 @@
         android:theme="@style/Theme.SearchMoviesApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.movies_cast.activity.MoviesCastActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.details.activity.DetailsActivity"
             android:exported="false" />
         <activity

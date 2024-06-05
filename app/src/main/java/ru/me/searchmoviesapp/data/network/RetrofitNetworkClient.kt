@@ -4,9 +4,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import ru.me.searchmoviesapp.data.NetworkClient
-import ru.me.searchmoviesapp.data.dto.MovieDetailsRequest
-import ru.me.searchmoviesapp.data.dto.MoviesSearchRequest
-import ru.me.searchmoviesapp.data.dto.Response
+import ru.me.searchmoviesapp.data.dto.movie_details.MovieDetailsRequest
+import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchRequest
+import ru.me.searchmoviesapp.data.dto.movies.Response
+import ru.me.searchmoviesapp.data.dto.full_cast.FullCastRequest
 
 class RetrofitNetworkClient(
     private val context: Context,
@@ -17,9 +18,6 @@ class RetrofitNetworkClient(
         if (isConnected() == false) {
             return Response().apply { resultCode = -1 }
         }
-//        if (dto !is MoviesSearchRequest) {
-//            return Response().apply { resultCode = 400 }
-//        }
 
         when (dto) {
             is MoviesSearchRequest -> {
@@ -38,10 +36,13 @@ class RetrofitNetworkClient(
                     body.apply { resultCode = response.code() }
                 } else Response().apply { resultCode = response.code() }
             }
+            is FullCastRequest -> {
+                val response = imdbService.getFullCast(dto.movieId).execute()
+                val body = response.body()
+                return body?.apply { resultCode = response.code() } ?: Response().apply { resultCode = response.code() }
+            }
             else -> { return Response().apply { resultCode = 400 } }
         }
-
-
     }
 
     private fun isConnected(): Boolean {

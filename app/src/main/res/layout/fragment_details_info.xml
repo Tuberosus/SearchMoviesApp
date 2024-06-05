@@ -22,7 +22,7 @@
         android:id="@+id/informationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:padding="16dp">
 
         <!--  Barriers  -->
@@ -111,6 +111,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,6 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintTop_toBottomOf="@id/imDbRating"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintEnd_toEndOf="parent"
@@ -129,6 +131,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintTop_toBottomOf="@id/year"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintEnd_toEndOf="parent"
@@ -138,6 +141,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintTop_toBottomOf="@id/countries"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,6 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintTop_toBottomOf="@id/genres"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +161,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintTop_toBottomOf="@id/directors"
             app:layout_constraintEnd_toEndOf="parent"
@@ -166,6 +172,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTag="starsTextTag"
             android:paddingStart="@dimen/detail_info_start_margin"
+            android:layout_marginTop="@dimen/detail_info_top_margin"
             app:layout_constraintStart_toEndOf="@id/textsBarrier"
             app:layout_constraintTop_toBottomOf="@id/writers"
             app:layout_constraintEnd_toEndOf="parent"
@@ -178,5 +185,14 @@
             app:layout_constraintTop_toBottomOf="@id/plot"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/plot" />
+        <Button
+            android:id="@+id/toCast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/plotText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/detail_info_button_margin"
+            android:text="@string/show_cast"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

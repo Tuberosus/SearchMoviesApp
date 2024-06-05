@@ -6,6 +6,6 @@ import ru.me.searchmoviesapp.domain.api.MoviesRepository
 
 val repositoryModule = module {
     single<MoviesRepository> {
-        MoviesRepositoryImpl(get(), get())
+        MoviesRepositoryImpl(get(), get(), get())
     }
 }

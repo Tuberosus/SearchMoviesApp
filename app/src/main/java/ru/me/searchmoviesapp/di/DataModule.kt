@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.me.searchmoviesapp.data.NetworkClient
 import ru.me.searchmoviesapp.data.SharedPreferences.LocalStorage
+import ru.me.searchmoviesapp.data.converters.MovieCastConverter
 import ru.me.searchmoviesapp.data.network.IMDbApiService
 import ru.me.searchmoviesapp.data.network.RetrofitNetworkClient
 
@@ -30,6 +31,10 @@ val dataModule = module {
 
     single {
         LocalStorage(get())
+    }
+
+    single {
+        MovieCastConverter()
     }
 
 }

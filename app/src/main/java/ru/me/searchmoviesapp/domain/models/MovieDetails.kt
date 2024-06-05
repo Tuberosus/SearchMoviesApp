@@ -1,6 +1,6 @@
 package ru.me.searchmoviesapp.domain.models
 
-import ru.me.searchmoviesapp.data.dto.Response
+import ru.me.searchmoviesapp.data.dto.movies.Response
 
 data class MovieDetails(val id: String,
                    val title: String,

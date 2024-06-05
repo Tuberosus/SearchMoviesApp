@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.data.dto
+package ru.me.searchmoviesapp.data.dto.movies
 
 class MoviesSearchResponse(val searchType: String,
                            val expression: String,

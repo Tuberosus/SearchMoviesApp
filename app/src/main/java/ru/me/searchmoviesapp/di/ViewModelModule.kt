@@ -6,6 +6,7 @@ import org.koin.dsl.module
 import ru.me.searchmoviesapp.ui.details.view_model.InfoDetailsViewModel
 import ru.me.searchmoviesapp.ui.details.view_model.PosterDetailsViewModel
 import ru.me.searchmoviesapp.ui.movies.MoviesSearchViewModel
+import ru.me.searchmoviesapp.ui.movies_cast.view_model.MovieCastViewModel
 
 val viewModelModule = module {
     viewModel {
@@ -16,5 +17,8 @@ val viewModelModule = module {
     }
     viewModel { (posterUrl: String) ->
         PosterDetailsViewModel(posterUrl)
+    }
+    viewModel { (movieId: String) ->
+        MovieCastViewModel(androidApplication(), get(), movieId)
     }
 }

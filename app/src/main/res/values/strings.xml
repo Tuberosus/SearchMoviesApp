@@ -4,7 +4,7 @@
     <string name="nothing_found">Ничего не найдено</string>
     <string name="poster">Постер</string>
     <string name="about_movie">О фильме</string>
-    
+
     <!-- Movie Details Fragment -->
     <string name="imDbRating">Рейтинг imDb:</string>
     <string name="year">Год:</string>
@@ -14,5 +14,5 @@
     <string name="writers">Сценарист:</string>
     <string name="stars">В ролях:</string>
     <string name="plot">Сюжет:</string>
-
+    <string name="show_cast">show cast</string>
 </resources>
