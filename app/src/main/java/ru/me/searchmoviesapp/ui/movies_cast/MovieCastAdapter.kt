@@ -3,6 +3,7 @@ package ru.me.searchmoviesapp.ui.movies_cast
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.me.searchmoviesapp.R
+import ru.me.searchmoviesapp.presentation.movies_cast.MoviesCastRVItem
 
 class MovieCastAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

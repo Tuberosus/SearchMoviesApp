@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.me.searchmoviesapp.R
+import ru.me.searchmoviesapp.presentation.movies_cast.MoviesCastRVItem
 
 class MovieCastHeaderViewHolder(parent: ViewGroup) :
     RecyclerView.ViewHolder(

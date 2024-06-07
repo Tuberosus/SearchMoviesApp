@@ -1,6 +1,4 @@
-package ru.me.searchmoviesapp.ui.movies_cast.view_model
-
-import ru.me.searchmoviesapp.ui.movies_cast.MoviesCastRVItem
+package ru.me.searchmoviesapp.presentation.movies_cast
 
 sealed interface MoviesCastState {
     data object Loading : MoviesCastState

@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.movies
+package ru.me.searchmoviesapp.presentation.movies
 
 import ru.me.searchmoviesapp.domain.models.Movie
 

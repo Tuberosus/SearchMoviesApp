@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.details.view_model
+package ru.me.searchmoviesapp.presentation.details
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.MovieDetails
-import ru.me.searchmoviesapp.ui.details.DetailsScreenState
+import ru.me.searchmoviesapp.presentation.details.DetailsScreenState
 
 class InfoDetailsViewModel(
     private val application: Application,

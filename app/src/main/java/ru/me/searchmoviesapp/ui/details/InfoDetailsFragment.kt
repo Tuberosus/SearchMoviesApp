@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.details.fragments
+package ru.me.searchmoviesapp.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import org.koin.core.parameter.parametersOf
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.databinding.FragmentDetailsInfoBinding
 import ru.me.searchmoviesapp.domain.models.MovieDetails
-import ru.me.searchmoviesapp.ui.details.DetailsScreenState
-import ru.me.searchmoviesapp.ui.details.view_model.InfoDetailsViewModel
+import ru.me.searchmoviesapp.presentation.details.DetailsScreenState
+import ru.me.searchmoviesapp.presentation.details.InfoDetailsViewModel
 import ru.me.searchmoviesapp.ui.movies_cast.MovieCastFragment
 
 class InfoDetailsFragment : Fragment() {
@@ -24,9 +24,6 @@ class InfoDetailsFragment : Fragment() {
                 putString(MOVIE_ID, movieID)
             }
         }
-    }
-    private val movieId by lazy {
-        requireArguments().getString(MOVIE_ID)
     }
 
     private val viewModel by viewModel<InfoDetailsViewModel> {
@@ -55,10 +52,13 @@ class InfoDetailsFragment : Fragment() {
         }
 
         binding.BtnToCast.setOnClickListener {
-            parentFragmentManager.commit {
-                replace(R.id.fragment_main_container_view, MovieCastFragment.newInstance(movieId.orEmpty()))
-                addToBackStack(null)
-                setReorderingAllowed(true)
+            parentFragment?.parentFragmentManager?.commit {
+                replace(
+                    R.id.rootFragmentContainerView,
+                    MovieCastFragment.newInstance(requireArguments().getString(MOVIE_ID).orEmpty()),
+                    MovieCastFragment.TAG
+                )
+                addToBackStack(MovieCastFragment.TAG)
             }
         }
     }

@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.me.searchmoviesapp.databinding.FragmentMovieCastBinding
-import ru.me.searchmoviesapp.ui.movies_cast.view_model.MovieCastViewModel
-import ru.me.searchmoviesapp.ui.movies_cast.view_model.MoviesCastState
+import ru.me.searchmoviesapp.presentation.movies_cast.MovieCastViewModel
+import ru.me.searchmoviesapp.presentation.movies_cast.MoviesCastState
 
 class MovieCastFragment : Fragment() {
 
     companion object {
         private const val MOVIE_ID = "movie_id"
+        const val TAG = "MoviesCastFragment"
 
         fun newInstance(movieId: String) = MovieCastFragment().apply {
             arguments = Bundle().apply {

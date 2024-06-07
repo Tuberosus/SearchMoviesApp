@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.movies_cast.view_model
+package ru.me.searchmoviesapp.presentation.movies_cast
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.FullCastData
-import ru.me.searchmoviesapp.ui.movies_cast.MoviesCastRVItem
 
 class MovieCastViewModel(
     private val application: Application,
@@ -31,7 +30,11 @@ class MovieCastViewModel(
                 consumer = object : MoviesInteractor.CastConsumer {
                     override fun consume(foundCast: FullCastData?, errorMessage: String?) {
                         when (foundCast){
-                            null -> movieCastLiveData.postValue(MoviesCastState.Error(errorMessage ?: ""))
+                            null -> movieCastLiveData.postValue(
+                                MoviesCastState.Error(
+                                    errorMessage ?: ""
+                                )
+                            )
                             else -> movieCastLiveData.postValue(castToUiStateContent(foundCast))
                         }
                     }

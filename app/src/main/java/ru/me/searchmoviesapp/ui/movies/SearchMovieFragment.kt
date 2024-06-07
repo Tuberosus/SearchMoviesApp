@@ -16,7 +16,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.databinding.FragmentSearchMovieBinding
 import ru.me.searchmoviesapp.domain.models.Movie
-import ru.me.searchmoviesapp.ui.details.fragments.DetailsFragment
+import ru.me.searchmoviesapp.presentation.movies.MoviesSearchViewModel
+import ru.me.searchmoviesapp.presentation.movies.MoviesState
+import ru.me.searchmoviesapp.ui.details.DetailsFragment
 
 class SearchMovieFragment : Fragment() {
 
@@ -57,11 +59,11 @@ class SearchMovieFragment : Fragment() {
                         if (savedInstanceState == null) {
                             parentFragmentManager.commit {
                                 replace(
-                                    R.id.fragment_main_container_view,
-                                    DetailsFragment.newInstance(movie.image, movie.id)
+                                    R.id.rootFragmentContainerView,
+                                    DetailsFragment.newInstance(movie.image, movie.id),
+                                    DetailsFragment.TAG
                                 )
-                                addToBackStack(null)
-                                setReorderingAllowed(true)
+                                addToBackStack(DetailsFragment.TAG)
                             }
                         }
                     }

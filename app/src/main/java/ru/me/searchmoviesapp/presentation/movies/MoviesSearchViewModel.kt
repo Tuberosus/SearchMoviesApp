@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.movies
+package ru.me.searchmoviesapp.presentation.movies
 
 import android.app.Application
 import android.os.Handler

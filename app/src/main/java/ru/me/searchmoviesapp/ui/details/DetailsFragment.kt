@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.details.fragments
+package ru.me.searchmoviesapp.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,8 @@ class DetailsFragment : Fragment() {
     companion object {
         const val POSTER_URL = "posterUrl"
         const val MOVIE_ID = "movieId"
+
+        const val TAG = "DetailsFragment"
 
         fun newInstance(posterUrl: String, movieId: String) = DetailsFragment().apply {
             arguments = Bundle().apply {
@@ -38,10 +40,11 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val posterUrl = requireArguments().getString(POSTER_URL)
         val movieId = requireArguments().getString(MOVIE_ID)
         val pagerAdapter = DetailsViewPagerAdapter(
-            parentFragmentManager,
+            childFragmentManager,
             lifecycle,
             posterUrl,
             movieId,
@@ -58,8 +61,8 @@ class DetailsFragment : Fragment() {
         tabMediator.attach()
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroyView() {
+        super.onDestroyView()
         tabMediator.detach()
     }
 }

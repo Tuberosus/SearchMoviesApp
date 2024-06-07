@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.details.fragments
+package ru.me.searchmoviesapp.ui.details
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

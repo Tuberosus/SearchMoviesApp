@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.details.fragments
+package ru.me.searchmoviesapp.ui.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.me.searchmoviesapp.databinding.FragmentDetailsPosterBinding
-import ru.me.searchmoviesapp.ui.details.view_model.PosterDetailsViewModel
+import ru.me.searchmoviesapp.presentation.details.PosterDetailsViewModel
 
 class PosterDetailsFragment: Fragment() {
 

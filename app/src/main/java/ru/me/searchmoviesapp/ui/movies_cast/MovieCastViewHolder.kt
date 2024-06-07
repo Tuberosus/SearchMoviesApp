@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.me.searchmoviesapp.R
+import ru.me.searchmoviesapp.presentation.movies_cast.MoviesCastRVItem
 
 class MovieCastViewHolder(
     parent: ViewGroup

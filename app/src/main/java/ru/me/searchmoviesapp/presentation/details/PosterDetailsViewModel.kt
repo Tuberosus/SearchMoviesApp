@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.details.view_model
+package ru.me.searchmoviesapp.presentation.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
