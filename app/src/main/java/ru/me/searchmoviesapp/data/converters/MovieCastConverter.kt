@@ -12,7 +12,7 @@ class MovieCastConverter {
         return with(response) {
             FullCastData(
                 imDbId = this.imDbId,
-                title = this.title,
+                fullTitle = this.fullTitle,
                 directors = convertCastShort(this.directors),
                 others = convertOthers(this.others),
                 writers = convertCastShort(this.writers),

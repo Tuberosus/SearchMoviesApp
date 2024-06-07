@@ -20,6 +20,7 @@ class MoviesSearchViewModel(
 
     companion object {
         private const val SEARCH_DEBOUNCE_DELAY = 2000L
+//        private const val CLICK_DEBOUNCE_DELAY = 1000L
         private val SEARCH_REQUEST_TOKEN = Any()
     }
 
@@ -32,6 +33,8 @@ class MoviesSearchViewModel(
     fun observeShowToast(): LiveData<String> = showToast
 
     private var latestSearchText: String? = null
+
+//    private var isClickAllowed = true
 
     override fun onCleared() {
         handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
@@ -54,6 +57,15 @@ class MoviesSearchViewModel(
             postTime,
         )
     }
+
+//    fun clickDebounce(): Boolean {
+//        val current = isClickAllowed
+//        if (isClickAllowed) {
+//            isClickAllowed = false
+//            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+//        }
+//        return current
+//    }
 
     private fun searchRequest(newSearchText: String) {
         if (newSearchText.isNotEmpty()) {

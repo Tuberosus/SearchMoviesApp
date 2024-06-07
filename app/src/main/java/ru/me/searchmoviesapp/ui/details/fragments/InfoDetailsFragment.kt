@@ -55,7 +55,7 @@ class InfoDetailsFragment : Fragment() {
         }
 
         binding.toCast.setOnClickListener {
-            val intent = MoviesCastActivity.newInstance(requireContext(), movieId!!)
+            val intent = MoviesCastActivity.newInstance(requireContext(), movieId.orEmpty())
             startActivity(intent)
         }
     }
