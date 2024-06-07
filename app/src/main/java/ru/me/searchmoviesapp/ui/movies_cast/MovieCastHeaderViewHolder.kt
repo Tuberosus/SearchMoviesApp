@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.movies_cast.activity
+package ru.me.searchmoviesapp.ui.movies_cast
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

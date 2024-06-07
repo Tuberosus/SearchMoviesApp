@@ -1,6 +1,5 @@
-package ru.me.searchmoviesapp.ui
+package ru.me.searchmoviesapp.ui.movies
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,10 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.databinding.FragmentSearchMovieBinding
 import ru.me.searchmoviesapp.domain.models.Movie
-import ru.me.searchmoviesapp.ui.details.activity.DetailsActivity
-import ru.me.searchmoviesapp.ui.movies.MoviesAdapter
-import ru.me.searchmoviesapp.ui.movies.MoviesSearchViewModel
-import ru.me.searchmoviesapp.ui.movies.MoviesState
+import ru.me.searchmoviesapp.ui.details.fragments.DetailsFragment
 
 class SearchMovieFragment : Fragment() {
 
@@ -58,16 +54,13 @@ class SearchMovieFragment : Fragment() {
             object : MoviesAdapter.MovieClickListener {
                 override fun onMovieClick(movie: Movie) {
                     if (clickDebounce()) {
-//                    val intent = Intent(requireContext(), DetailsActivity::class.java)
-//                    intent.putExtra(DetailsActivity.POSTER_URL, movie.image)
-//                    intent.putExtra(DetailsActivity.MOVIE_ID, movie.id)
-//                    startActivity(intent)
                         if (savedInstanceState == null) {
                             parentFragmentManager.commit {
                                 replace(
                                     R.id.fragment_main_container_view,
                                     DetailsFragment.newInstance(movie.image, movie.id)
                                 )
+                                addToBackStack(null)
                                 setReorderingAllowed(true)
                             }
                         }

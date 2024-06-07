@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui.movies_cast.activity
+package ru.me.searchmoviesapp.ui.movies_cast
 
 import ru.me.searchmoviesapp.domain.models.MovieCastPerson
 

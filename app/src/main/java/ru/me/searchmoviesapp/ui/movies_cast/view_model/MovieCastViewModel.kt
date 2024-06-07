@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.FullCastData
-import ru.me.searchmoviesapp.ui.movies_cast.activity.MoviesCastRVItem
+import ru.me.searchmoviesapp.ui.movies_cast.MoviesCastRVItem
 
 class MovieCastViewModel(
     private val application: Application,

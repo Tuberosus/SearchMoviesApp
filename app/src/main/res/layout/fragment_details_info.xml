@@ -186,7 +186,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="@string/plot" />
         <Button
-            android:id="@+id/toCast"
+            android:id="@+id/BtnToCast"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/plotText"

@@ -1,4 +1,4 @@
-package ru.me.searchmoviesapp.ui
+package ru.me.searchmoviesapp.ui.details.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.databinding.FragmentDetailsBinding
-import ru.me.searchmoviesapp.ui.details.fragments.DetailsViewPagerAdapter
 
 class DetailsFragment : Fragment() {
     companion object {
