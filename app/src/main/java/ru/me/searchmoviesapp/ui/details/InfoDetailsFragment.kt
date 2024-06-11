@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import ru.me.searchmoviesapp.R
+import ru.me.searchmoviesapp.core.navigation.Router
 import ru.me.searchmoviesapp.databinding.FragmentDetailsInfoBinding
 import ru.me.searchmoviesapp.domain.models.MovieDetails
 import ru.me.searchmoviesapp.presentation.details.DetailsScreenState
@@ -29,6 +31,7 @@ class InfoDetailsFragment : Fragment() {
     private val viewModel by viewModel<InfoDetailsViewModel> {
         parametersOf(requireArguments().getString(MOVIE_ID))
     }
+    private val router: Router by inject()
 
     private lateinit var binding: FragmentDetailsInfoBinding
 
@@ -52,14 +55,9 @@ class InfoDetailsFragment : Fragment() {
         }
 
         binding.BtnToCast.setOnClickListener {
-            parentFragment?.parentFragmentManager?.commit {
-                replace(
-                    R.id.rootFragmentContainerView,
-                    MovieCastFragment.newInstance(requireArguments().getString(MOVIE_ID).orEmpty()),
-                    MovieCastFragment.TAG
-                )
-                addToBackStack(MovieCastFragment.TAG)
-            }
+            router.openFragment(
+                MovieCastFragment.newInstance(requireArguments().getString(MOVIE_ID).orEmpty())
+            )
         }
     }
 

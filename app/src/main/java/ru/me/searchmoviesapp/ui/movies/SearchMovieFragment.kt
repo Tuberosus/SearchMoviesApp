@@ -12,8 +12,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.me.searchmoviesapp.R
+import ru.me.searchmoviesapp.core.navigation.Router
 import ru.me.searchmoviesapp.databinding.FragmentSearchMovieBinding
 import ru.me.searchmoviesapp.domain.models.Movie
 import ru.me.searchmoviesapp.presentation.movies.MoviesSearchViewModel
@@ -35,6 +37,7 @@ class SearchMovieFragment : Fragment() {
     private lateinit var textWatcher: TextWatcher
 
     private val viewModel by viewModel<MoviesSearchViewModel>()
+    private val router: Router by inject()
 
     private lateinit var adapter: MoviesAdapter
 
@@ -56,16 +59,12 @@ class SearchMovieFragment : Fragment() {
             object : MoviesAdapter.MovieClickListener {
                 override fun onMovieClick(movie: Movie) {
                     if (clickDebounce()) {
-                        if (savedInstanceState == null) {
-                            parentFragmentManager.commit {
-                                replace(
-                                    R.id.rootFragmentContainerView,
-                                    DetailsFragment.newInstance(movie.image, movie.id),
-                                    DetailsFragment.TAG
-                                )
-                                addToBackStack(DetailsFragment.TAG)
-                            }
-                        }
+                        router.openFragment(
+                            DetailsFragment.newInstance(
+                                movieId = movie.id,
+                                posterUrl = movie.image
+                            )
+                        )
                     }
                 }
                 override fun onFavoriteToggleClick(movie: Movie) {
