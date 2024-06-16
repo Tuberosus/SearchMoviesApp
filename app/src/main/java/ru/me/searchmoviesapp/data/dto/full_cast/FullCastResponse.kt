@@ -1,6 +1,6 @@
 package ru.me.searchmoviesapp.data.dto.full_cast
 
-import ru.me.searchmoviesapp.data.dto.movies.Response
+import ru.me.searchmoviesapp.data.dto.Response
 
 class FullCastResponse(val imDbId: String,
                        val title: String,

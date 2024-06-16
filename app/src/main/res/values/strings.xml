@@ -15,4 +15,12 @@
     <string name="stars">В ролях:</string>
     <string name="plot">Сюжет:</string>
     <string name="show_cast">show cast</string>
+
+    <string name="text_info_fragment">IMDB Search Movie</string>
+    <string name="version_info_fragment">1.0.0</string>
+
+    <!--  Bottom navigation menu  -->
+    <string name="movies">Movies</string>
+    <string name="persons">Persons</string>
+    <string name="info">Info</string>
 </resources>

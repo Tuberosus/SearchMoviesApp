@@ -2,15 +2,17 @@ package ru.me.searchmoviesapp.data
 
 import ru.me.searchmoviesapp.data.SharedPreferences.LocalStorage
 import ru.me.searchmoviesapp.data.converters.MovieCastConverter
+import ru.me.searchmoviesapp.data.dto.names.NamesRequest
+import ru.me.searchmoviesapp.data.dto.names.NamesResponse
 import ru.me.searchmoviesapp.data.dto.full_cast.FullCastRequest
 import ru.me.searchmoviesapp.data.dto.full_cast.FullCastResponse
 import ru.me.searchmoviesapp.data.dto.movie_details.MovieDetailsRequest
 import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchRequest
 import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchResponse
 import ru.me.searchmoviesapp.domain.api.MoviesRepository
+import ru.me.searchmoviesapp.domain.models.Name
 import ru.me.searchmoviesapp.domain.models.FullCastData
 import ru.me.searchmoviesapp.domain.models.Movie
-import ru.me.searchmoviesapp.domain.models.MovieCastPerson
 import ru.me.searchmoviesapp.domain.models.MovieDetails
 import util.Resource
 

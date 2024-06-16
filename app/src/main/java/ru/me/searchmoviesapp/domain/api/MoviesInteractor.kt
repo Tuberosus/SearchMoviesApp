@@ -1,5 +1,6 @@
 package ru.me.searchmoviesapp.domain.api
 
+import ru.me.searchmoviesapp.domain.models.Name
 import ru.me.searchmoviesapp.domain.models.FullCastData
 import ru.me.searchmoviesapp.domain.models.MovieDetails
 import ru.me.searchmoviesapp.domain.models.Movie
@@ -19,6 +20,7 @@ interface MoviesInteractor {
     interface CastConsumer {
         fun consume(foundCast: FullCastData?, errorMessage: String?)
     }
+
     fun addMovieToFavorites(movie: Movie)
     fun removeMovieFromFavorites(movie: Movie)
 }

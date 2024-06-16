@@ -6,7 +6,8 @@ import android.net.NetworkCapabilities
 import ru.me.searchmoviesapp.data.NetworkClient
 import ru.me.searchmoviesapp.data.dto.movie_details.MovieDetailsRequest
 import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchRequest
-import ru.me.searchmoviesapp.data.dto.movies.Response
+import ru.me.searchmoviesapp.data.dto.Response
+import ru.me.searchmoviesapp.data.dto.names.NamesRequest
 import ru.me.searchmoviesapp.data.dto.full_cast.FullCastRequest
 
 class RetrofitNetworkClient(
@@ -40,6 +41,15 @@ class RetrofitNetworkClient(
                 val response = imdbService.getFullCast(dto.movieId).execute()
                 val body = response.body()
                 return body?.apply { resultCode = response.code() } ?: Response().apply { resultCode = response.code() }
+            }
+            is NamesRequest -> {
+                val response = imdbService.getActors(dto.expression).execute()
+                val body = response.body()
+                return if (body != null) {
+                    body.apply { resultCode = response.code() }
+                } else {
+                    Response().apply { resultCode = response.code() }
+                }
             }
             else -> { return Response().apply { resultCode = 400 } }
         }
