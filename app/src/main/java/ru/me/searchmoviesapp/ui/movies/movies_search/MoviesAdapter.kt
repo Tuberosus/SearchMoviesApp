@@ -1,5 +1,6 @@
 package ru.me.searchmoviesapp.ui.movies.movies_search
 
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ class MoviesAdapter(private val clickListener: MovieClickListener) : RecyclerVie
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies.get(position))
         holder.itemView.setOnClickListener {
+            Log.d("MyTag", "${movies.get(position).title}")
             clickListener.onMovieClick(movies.get(position))
         }
 

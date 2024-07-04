@@ -6,7 +6,8 @@
     android:id="@+id/rootFragmentContainerView"
     tools:context=".ui.root.RootActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_view"
         android:layout_width="0dp"

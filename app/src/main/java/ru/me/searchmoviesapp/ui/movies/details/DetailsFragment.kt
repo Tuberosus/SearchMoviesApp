@@ -1,6 +1,7 @@
 package ru.me.searchmoviesapp.ui.movies.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +16,13 @@ class DetailsFragment : Fragment() {
         const val POSTER_URL = "posterUrl"
         const val MOVIE_ID = "movieId"
 
-        fun createArgs(posterUrl: String, movieId: String): Bundle =
-            bundleOf(
+        fun createArgs(posterUrl: String, movieId: String): Bundle {
+            Log.d("MyTag", movieId.toString())
+            return bundleOf(
                 POSTER_URL to posterUrl,
                 MOVIE_ID to movieId
-                )
+            )
+        }
     }
 
     private var _binding: FragmentDetailsBinding? = null

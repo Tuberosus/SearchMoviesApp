@@ -17,19 +17,12 @@ import ru.me.searchmoviesapp.presentation.names.NamesViewModel
 
 class NamesFragment : Fragment() {
 
-    companion object {
-        private const val CLICK_DEBOUNCE_DELAY = 1000L
-    }
-
     private val viewModel by viewModel<NamesViewModel>()
 
     private lateinit var binding: FragmentNamesBinding
     private val adapter = NamesAdapter()
 
-    private val handler = Handler(Looper.getMainLooper())
     private lateinit var textWatcher: TextWatcher
-
-    private var isClickAllowed = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
