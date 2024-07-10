@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.FullCastData
@@ -24,22 +26,13 @@ class MovieCastViewModel(
     private fun getMovieCast() {
         if (movieId != null) {
             movieCastLiveData.postValue(MoviesCastState.Loading)
-
-            moviesInteractor.getFullCast(
-                movieId = movieId,
-                consumer = object : MoviesInteractor.CastConsumer {
-                    override fun consume(foundCast: FullCastData?, errorMessage: String?) {
-                        when (foundCast){
-                            null -> movieCastLiveData.postValue(
-                                MoviesCastState.Error(
-                                    errorMessage ?: ""
-                                )
-                            )
-                            else -> movieCastLiveData.postValue(castToUiStateContent(foundCast))
-                        }
+            viewModelScope.launch {
+                moviesInteractor
+                    .getFullCast(movieId)
+                    .collect { pair ->
+                        processResult(pair.first, pair.second)
                     }
-                }
-            )
+            }
         } else {
             movieCastLiveData.postValue(MoviesCastState.Error(application.getString(R.string.something_went_wrong)))
         }
@@ -76,5 +69,16 @@ class MovieCastViewModel(
             fullTitle = cast.fullTitle,
             items = items
         )
+    }
+
+    private fun processResult(foundCast: FullCastData?, errorMessage: String?) {
+        when (foundCast){
+            null -> movieCastLiveData.postValue(
+                MoviesCastState.Error(
+                    errorMessage ?: ""
+                )
+            )
+            else -> movieCastLiveData.postValue(castToUiStateContent(foundCast))
+        }
     }
 }

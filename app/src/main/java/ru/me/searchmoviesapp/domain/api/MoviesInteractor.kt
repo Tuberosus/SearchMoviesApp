@@ -1,25 +1,16 @@
 package ru.me.searchmoviesapp.domain.api
 
-import ru.me.searchmoviesapp.domain.models.Name
+import kotlinx.coroutines.flow.Flow
 import ru.me.searchmoviesapp.domain.models.FullCastData
-import ru.me.searchmoviesapp.domain.models.MovieDetails
 import ru.me.searchmoviesapp.domain.models.Movie
+import ru.me.searchmoviesapp.domain.models.MovieDetails
 
 interface MoviesInteractor {
-    fun searchMovies(expression: String, consumer: MoviesConsumer)
-    interface MoviesConsumer {
-        fun consume(foundMovies: List<Movie>?, errorMessage: String?)
-    }
+    fun searchMovies(expression: String): Flow<Pair<List<Movie>?, String?>>
 
-    fun getMovieDetails(movieId: String, consumer: DetailsConsumer)
-    interface DetailsConsumer {
-        fun consume(foundDetails: MovieDetails?, errorMessage: String?)
-    }
+    fun getMovieDetails(movieId: String): Flow<Pair<MovieDetails?, String?>>
 
-    fun getFullCast(movieId: String, consumer: CastConsumer)
-    interface CastConsumer {
-        fun consume(foundCast: FullCastData?, errorMessage: String?)
-    }
+    fun getFullCast(movieId: String): Flow<Pair<FullCastData?, String?>>
 
     fun addMovieToFavorites(movie: Movie)
     fun removeMovieFromFavorites(movie: Movie)

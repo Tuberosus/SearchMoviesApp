@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.Movie
@@ -46,42 +47,13 @@ class MoviesSearchViewModel(
         if (newSearchText.isNotEmpty()) {
             renderState(MoviesState.Loading)
 
-            moviesInteractor.searchMovies(newSearchText, object : MoviesInteractor.MoviesConsumer {
-                override fun consume(foundMovies: List<Movie>?, errorMessage: String?) {
-                    val movies = mutableListOf<Movie>()
-                    if (foundMovies != null) {
-                        movies.addAll(foundMovies)
+            viewModelScope.launch {
+                moviesInteractor
+                    .searchMovies(newSearchText)
+                    .collect { pair ->
+                        processResult(pair.first, pair.second)
                     }
-
-                    when {
-                        errorMessage != null -> {
-                            renderState(
-                                MoviesState.Error(
-                                    errorMessage = application.getString(R.string.something_went_wrong),
-                                )
-                            )
-                            showToast.postValue(errorMessage!!)
-                        }
-
-                        movies.isEmpty() -> {
-                            renderState(
-                                MoviesState.Empty(
-                                    message = application.getString(R.string.nothing_found),
-                                )
-                            )
-                        }
-
-                        else -> {
-                            renderState(
-                                MoviesState.Content(
-                                    movies = movies,
-                                )
-                            )
-                        }
-                    }
-
-                }
-            })
+            }
         }
     }
 
@@ -127,6 +99,40 @@ class MoviesSearchViewModel(
                 is MoviesState.Empty -> movieState
                 is MoviesState.Error -> movieState
                 is MoviesState.Loading -> movieState
+            }
+        }
+    }
+
+    private fun processResult(foundMovies: List<Movie>?, errorMessage: String?) {
+        val movies = mutableListOf<Movie>()
+        if (foundMovies != null) {
+            movies.addAll(foundMovies)
+        }
+
+        when {
+            errorMessage != null -> {
+                renderState(
+                    MoviesState.Error(
+                        errorMessage = application.getString(R.string.something_went_wrong),
+                    )
+                )
+                showToast.postValue(errorMessage!!)
+            }
+
+            movies.isEmpty() -> {
+                renderState(
+                    MoviesState.Empty(
+                        message = application.getString(R.string.nothing_found),
+                    )
+                )
+            }
+
+            else -> {
+                renderState(
+                    MoviesState.Content(
+                        movies = movies,
+                    )
+                )
             }
         }
     }

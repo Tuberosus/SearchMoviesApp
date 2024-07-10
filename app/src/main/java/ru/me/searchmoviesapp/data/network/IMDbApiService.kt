@@ -13,14 +13,14 @@ interface IMDbApiService {
         private const val KEY = "k_zcuw1ytf"
     }
     @GET("/en/API/SearchMovie/${KEY}/{expression}")
-    fun searchMovies(@Path("expression") expression: String): Call<MoviesSearchResponse>
+    suspend fun searchMovies(@Path("expression") expression: String): MoviesSearchResponse
 
     @GET("/en/API/Title/${KEY}/{movie_id}")
-    fun getMovieDetails(@Path("movie_id") movieId: String): Call<MovieDetails>
+    suspend fun getMovieDetails(@Path("movie_id") movieId: String): MovieDetails
 
     @GET("/en/API/FullCast/${KEY}/{movie_id}")
-    fun getFullCast(@Path("movie_id") movieId: String): Call<FullCastResponse>
+    suspend fun getFullCast(@Path("movie_id") movieId: String): FullCastResponse
 
     @GET("/en/API/SearchName/${KEY}/{expression}")
-    fun getActors(@Path("expression") expression: String): Call<NamesResponse>
+    suspend fun getActors(@Path("expression") expression: String): NamesResponse
 }

@@ -3,55 +3,73 @@ package ru.me.searchmoviesapp.data.network
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ru.me.searchmoviesapp.data.NetworkClient
+import ru.me.searchmoviesapp.data.dto.Response
+import ru.me.searchmoviesapp.data.dto.full_cast.FullCastRequest
 import ru.me.searchmoviesapp.data.dto.movie_details.MovieDetailsRequest
 import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchRequest
-import ru.me.searchmoviesapp.data.dto.Response
 import ru.me.searchmoviesapp.data.dto.names.NamesRequest
-import ru.me.searchmoviesapp.data.dto.full_cast.FullCastRequest
 
 class RetrofitNetworkClient(
     private val context: Context,
     private val imdbService: IMDbApiService,
     ) : NetworkClient {
 
-    override fun doRequest(dto: Any): Response {
+    override suspend fun doRequest(dto: Any): Response {
         if (isConnected() == false) {
             return Response().apply { resultCode = -1 }
         }
 
         when (dto) {
             is MoviesSearchRequest -> {
-                val response = imdbService.searchMovies(dto.expression).execute()
-                val body = response.body()
-                return if (body != null) {
-                    body.apply { resultCode = response.code() }
-                } else {
-                    Response().apply { resultCode = response.code() }
+                return withContext(Dispatchers.IO) {
+                    try {
+                        val response = imdbService.searchMovies(dto.expression)
+                        response.apply { resultCode = 200 }
+                    } catch (e: Throwable) {
+                        Response().apply { resultCode = 500 }
+                    }
                 }
             }
+
             is MovieDetailsRequest -> {
-                val response = imdbService.getMovieDetails(dto.movieId).execute()
-                val body = response.body()
-                return if (body != null) {
-                    body.apply { resultCode = response.code() }
-                } else Response().apply { resultCode = response.code() }
-            }
-            is FullCastRequest -> {
-                val response = imdbService.getFullCast(dto.movieId).execute()
-                val body = response.body()
-                return body?.apply { resultCode = response.code() } ?: Response().apply { resultCode = response.code() }
-            }
-            is NamesRequest -> {
-                val response = imdbService.getActors(dto.expression).execute()
-                val body = response.body()
-                return if (body != null) {
-                    body.apply { resultCode = response.code() }
-                } else {
-                    Response().apply { resultCode = response.code() }
+                return withContext(Dispatchers.IO) {
+                    try {
+                        val response = imdbService.getMovieDetails(dto.movieId)
+                        response.apply { resultCode = 200 }
+                    } catch (e: Throwable) {
+                        Response().apply { resultCode = 500 }
+                    }
                 }
             }
-            else -> { return Response().apply { resultCode = 400 } }
+
+            is FullCastRequest -> {
+                return withContext(Dispatchers.IO) {
+                    try {
+                        val response = imdbService.getFullCast(dto.movieId)
+                        response.apply { resultCode = 200 }
+                    } catch (e: Throwable) {
+                        Response().apply { resultCode = 500 }
+                    }
+                }
+            }
+
+            is NamesRequest -> {
+                return withContext(Dispatchers.IO) {
+                    try {
+                        val response = imdbService.getActors(dto.expression)
+                        response.apply { resultCode = 200 }
+                    } catch (e: Throwable) {
+                        Response().apply { resultCode = 500 }
+                    }
+                }
+            }
+
+            else -> {
+                return Response().apply { resultCode = 400 }
+            }
         }
     }
 

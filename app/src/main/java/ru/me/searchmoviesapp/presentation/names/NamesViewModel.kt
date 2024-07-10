@@ -1,9 +1,6 @@
 package ru.me.searchmoviesapp.presentation.names
 
 import android.app.Application
-import android.os.Handler
-import android.os.Looper
-import android.os.SystemClock
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,38 +47,45 @@ class NamesViewModel(
             observeLiveData.postValue(NamesScreenState.Loading)
         }
 
-        searchNamesUseCase.search(newSearchText) { foundActors, errorMessage ->
-            val names = mutableListOf<Name>()
-            if (foundActors != null) {
-                names.addAll(foundActors)
+        viewModelScope.launch {
+            searchNamesUseCase
+                .search(newSearchText)
+                .collect { pair ->
+                    processResult(pair.first, pair.second)
+                }
+        }
+    }
+
+    private fun processResult(foundNames: List<Name>?, errorMessage: String?) {
+        val names = mutableListOf<Name>()
+        if (foundNames != null) {
+            names.addAll(foundNames)
+        }
+
+        when {
+            errorMessage != null -> {
+                observeLiveData.postValue(
+                    NamesScreenState.Error(
+                        message = application.getString(R.string.something_went_wrong)
+                    )
+                )
             }
 
-            when {
-                errorMessage != null -> {
-                    observeLiveData.postValue(
-                        NamesScreenState.Error(
-                            message = application.getString(R.string.something_went_wrong)
-                        )
+            names.isEmpty() -> {
+                observeLiveData.postValue(
+                    NamesScreenState.Empty(
+                        message = application.getString(R.string.nothing_found)
                     )
-                }
-
-                names.isEmpty() -> {
-                    observeLiveData.postValue(
-                        NamesScreenState.Empty(
-                            message = application.getString(R.string.nothing_found)
-                        )
-                    )
-                }
-
-                else -> {
-                    observeLiveData.postValue(
-                        NamesScreenState.Content(
-                            names = names
-                        )
-                    )
-                }
+                )
             }
 
+            else -> {
+                observeLiveData.postValue(
+                    NamesScreenState.Content(
+                        names = names
+                    )
+                )
+            }
         }
     }
 

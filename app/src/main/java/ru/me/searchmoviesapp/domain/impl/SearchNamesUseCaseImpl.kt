@@ -1,18 +1,19 @@
 package ru.me.searchmoviesapp.domain.impl
 
-import java.util.concurrent.Executors
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import ru.me.searchmoviesapp.domain.api.NamesRepository
 import ru.me.searchmoviesapp.domain.api.SearchNamesUseCase
+import ru.me.searchmoviesapp.domain.models.Name
 import util.Resource
 
 class SearchNamesUseCaseImpl(private val repository: NamesRepository): SearchNamesUseCase {
 
-    private val executor = Executors.newCachedThreadPool()
-    override fun search(expression: String, consumer: SearchNamesUseCase.NamesConsumer) {
-        executor.execute {
-            when (val resource = repository.searchName(expression)) {
-                is Resource.Success -> { consumer.consume(resource.data, null) }
-                is Resource.Error -> { consumer.consume(null, resource.message) }
+    override fun search(expression: String): Flow<Pair<List<Name>?, String?>> {
+        return repository.searchName(expression).map { result ->
+            when (result) {
+                is Resource.Success -> { Pair(result.data, null) }
+                is Resource.Error -> { Pair(null, result.message) }
             }
         }
     }
