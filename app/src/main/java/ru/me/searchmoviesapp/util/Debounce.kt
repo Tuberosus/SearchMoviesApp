@@ -1,4 +1,4 @@
-package util
+package ru.me.searchmoviesapp.util
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

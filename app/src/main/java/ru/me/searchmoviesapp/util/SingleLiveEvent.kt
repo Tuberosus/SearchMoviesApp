@@ -1,4 +1,4 @@
-package util
+package ru.me.searchmoviesapp.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

@@ -19,7 +19,7 @@ import ru.me.searchmoviesapp.presentation.movies_search.MoviesSearchViewModel
 import ru.me.searchmoviesapp.presentation.movies_search.MoviesState
 import ru.me.searchmoviesapp.ui.movies.details.DetailsFragment
 import ru.me.searchmoviesapp.ui.root.RootActivity
-import util.debounce
+import ru.me.searchmoviesapp.util.debounce
 
 class SearchMovieFragment : Fragment() {
 

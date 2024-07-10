@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.map
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.api.MoviesRepository
 import ru.me.searchmoviesapp.domain.models.Movie
-import util.Resource
+import ru.me.searchmoviesapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import ru.me.searchmoviesapp.domain.models.FullCastData
 import ru.me.searchmoviesapp.domain.models.MovieDetails

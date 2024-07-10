@@ -1,4 +1,4 @@
-package util
+package ru.me.searchmoviesapp.util
 
 import android.app.Application
 import org.koin.android.ext.koin.androidContext

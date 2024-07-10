@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 import ru.me.searchmoviesapp.R
 import ru.me.searchmoviesapp.domain.api.MoviesInteractor
 import ru.me.searchmoviesapp.domain.models.Movie
-import util.SingleLiveEvent
-import util.debounce
+import ru.me.searchmoviesapp.util.SingleLiveEvent
+import ru.me.searchmoviesapp.util.debounce
 
 class MoviesSearchViewModel(
     private val application: Application,

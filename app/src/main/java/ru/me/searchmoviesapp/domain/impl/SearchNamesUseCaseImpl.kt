@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.map
 import ru.me.searchmoviesapp.domain.api.NamesRepository
 import ru.me.searchmoviesapp.domain.api.SearchNamesUseCase
 import ru.me.searchmoviesapp.domain.models.Name
-import util.Resource
+import ru.me.searchmoviesapp.util.Resource
 
 class SearchNamesUseCaseImpl(private val repository: NamesRepository): SearchNamesUseCase {
 
