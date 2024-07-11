@@ -4,11 +4,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.me.searchmoviesapp.data.SharedPreferences.LocalStorage
 import ru.me.searchmoviesapp.data.converters.MovieCastConverter
+import ru.me.searchmoviesapp.data.converters.MovieDbConvertor
+import ru.me.searchmoviesapp.data.db.AppDatabase
 import ru.me.searchmoviesapp.data.dto.names.NamesRequest
 import ru.me.searchmoviesapp.data.dto.names.NamesResponse
 import ru.me.searchmoviesapp.data.dto.full_cast.FullCastRequest
 import ru.me.searchmoviesapp.data.dto.full_cast.FullCastResponse
 import ru.me.searchmoviesapp.data.dto.movie_details.MovieDetailsRequest
+import ru.me.searchmoviesapp.data.dto.movies.MovieDto
 import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchRequest
 import ru.me.searchmoviesapp.data.dto.movies.MoviesSearchResponse
 import ru.me.searchmoviesapp.domain.api.MoviesRepository
@@ -22,6 +25,8 @@ class MoviesRepositoryImpl(
     private val networkClient: NetworkClient,
     private val localStorage: LocalStorage,
     private val movieCastConverter: MovieCastConverter,
+    private val appDatabase: AppDatabase,
+    private val movieDbConvertor: MovieDbConvertor,
 ) :
     MoviesRepository {
 
@@ -45,6 +50,7 @@ class MoviesRepositoryImpl(
                             inFavorite = stored.contains(it.id)
                         )
                     }
+                    saveMovie(results)
                     emit(Resource.Success(data))
                 }
             }
@@ -86,5 +92,10 @@ class MoviesRepositoryImpl(
 
             else -> emit(Resource.Error("Ошибка сервера"))
         }
+    }
+
+    private suspend fun saveMovie(movies: List<MovieDto>) {
+        val movieEntities = movies.map { movie -> movieDbConvertor.map(movie) }
+        appDatabase.movieDao().insertMovies(movieEntities)
     }
 }

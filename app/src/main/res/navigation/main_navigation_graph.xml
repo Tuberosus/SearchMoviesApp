@@ -44,4 +44,9 @@
         android:name="ru.me.searchmoviesapp.ui.info.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="ru.me.searchmoviesapp.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>
